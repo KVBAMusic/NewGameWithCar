@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class CarComponent : MonoBehaviour
+public class CarComponent : NetworkBehaviour
 {
     protected CarBrain car;
 

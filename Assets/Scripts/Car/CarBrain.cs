@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using PathCreation;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CarMovement))]
 [RequireComponent(typeof(CarAIController))]
 [RequireComponent(typeof(CarPositionTracker))]
-public class CarBrain : MonoBehaviour
+public class CarBrain : NetworkBehaviour
 {
     public event EventHandler OnLapStarted;
     public event EventHandler OnPowerupCollected;
@@ -19,6 +20,9 @@ public class CarBrain : MonoBehaviour
     [SerializeField] private CarMovement movement;
     [SerializeField] private CarAIController aIController;
     [SerializeField] private CarPositionTracker position;
+    [SerializeField] private NetworkObject networkObject;
+    private NetworkManager networkManager;
+    private ulong clientId;
 
     public Rigidbody RB => rb;
     public CarMovement Movement => movement;
@@ -26,10 +30,13 @@ public class CarBrain : MonoBehaviour
     public CarPositionTracker Position => position;
     public bool isAI = true;
 
+
     public VertexPath path {get; private set;}
 
     private void Awake() 
     {
+        networkManager = FindObjectOfType<NetworkManager>();
+        clientId = networkManager.LocalClientId;
         Init(CarSettings.NewPlayer(new CarStats()));
     }
 
