@@ -26,7 +26,10 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        position.text = player.Position.Position.ToString();
-        lap.text = player.Position.lap.ToString();
+        if (!(player is null))
+        {
+            position.text = player.Position.Position.ToString();
+            lap.text = player.Position.lap.ToString();
+        }
     }
 }

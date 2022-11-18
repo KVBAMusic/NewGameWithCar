@@ -15,12 +15,15 @@ public class CameraTarget : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var pos = target.position;
-        var rot = target.rotation;
-        if (car.Movement.isReversing)
+        if (!(car is null))
         {
-            rot *= Quaternion.Euler(0, 180, 0);
+            var pos = target.position;
+            var rot = target.rotation;
+            if (car.Movement.isReversing)
+            {
+                rot *= Quaternion.Euler(0, 180, 0);
+            }
+            transform.SetPositionAndRotation(pos, rot);
         }
-        transform.SetPositionAndRotation(pos, rot);
     }
 }
