@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarAIController : CarComponent
+public class CarAIController : AbstractCarComponent
 {
     // this is gonna be a bot
     // 1. get a point on path

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarMovement : CarComponent
+public class CarMovement : AbstractCarComponent
 {
     // wheel colliders
     // add in order: FR, FL, RR, RL

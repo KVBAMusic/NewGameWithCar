@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarPositionTracker : CarComponent
+public class CarPositionTracker : AbstractCarComponent
 {
     public int Position;
 

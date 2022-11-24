@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CarPowerups : CarComponent
+public class CarPowerups : AbstractCarComponent
 {
     public enum Powerup
     {
