@@ -146,23 +146,14 @@ public class CarBrain : NetworkBehaviour
     // ----------------------------------
 
 
-    // w przypadku, gdy musisz zrobić jakiś init z sieci daj to w 
+    // w przypadku, gdy musisz zrobić jakiś init z sieci daj to w OnNetworkSpawn zamiast Start
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         
         FindObjectOfType<CameraTarget>().SetTarget(this);
-    }
-
-    private void Awake() 
-    {
-        networkManager = FindObjectOfType<NetworkManager>();
-        clientId = networkManager.LocalClientId;
+        
         Init(CarSettings.NewPlayer(new CarStats()));
-    }
-
-    private void OnEnable()
-    {
     }
 
     private void Init(CarSettings settings)
