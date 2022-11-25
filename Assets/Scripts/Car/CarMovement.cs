@@ -51,6 +51,7 @@ public class CarMovement : AbstractCarComponent
 
     void Update()
     {
+        if (!IsOwner) return;
         if (!car.isAI)
         {
             axisH = Input.GetAxis("Horizontal");

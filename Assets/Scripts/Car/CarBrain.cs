@@ -33,11 +33,50 @@ public class CarBrain : NetworkBehaviour
 
     public VertexPath path {get; private set;}
 
+    // przykładowy NetworkVariable:
+    //
+    // NetworkVariable<T> netVar = new NetowrkVariable<T>();
+    // NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość);
+    // NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.[tu coś wstaw]);
+    // ---------------------------------
+    // T NIE MOŻE BYĆ NULLABLE!!!
+    // jeśli chcesz dać klasę, zrób dedykowanego structa z tą klasą (musi implementować INetworkSerializable)
+    // tam będzie parametr serializer, po prostu daj
+    //
+    // serializer.SerializeValue(ref [pole structa]);
+    // DLA KAŻDEGO POLA
+    // ---------------------------------
+    // jeśli chcesz użyć stringa, najpierw daj na górze
+    //
+    // using Unity.Collections;
+    //
+    // a potem użyj któregoś structa FixedString, np FixedString128Bytes
+    // NIE MOŻNA ZMIENIAĆ DŁUGOŚCI FixedString, GDYŻ NIE JEST ON REALOKOWANY!!!!
+    // ---------------------------------
+    // jak chcesz zmienić wartość NetworkVariable:
+    //
+    // netVar.Value = [nowa wartość];
+    // ---------------------------------
+    // jak chcesz, żeby coś się działo po zmianie wartości:
+    //
+    // netVar.OnValueChanged += (T previousValue, T newValue) => {// tu daj kod};
+
+    // w przypadku, gdy musisz zrobić jakiś init z sieci daj to w 
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+    }
+
     private void Awake() 
     {
         networkManager = FindObjectOfType<NetworkManager>();
         clientId = networkManager.LocalClientId;
         Init(CarSettings.NewPlayer(new CarStats()));
+    }
+
+    private void OnEnable()
+    {
+        transform.position = new Vector3(135, 36, -14); //temporary
     }
 
     private void Init(CarSettings settings)
