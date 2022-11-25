@@ -4,26 +4,45 @@ using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
 {
-    public Transform target;
-
-    CarBrain car;
+    CarBrain target;
 
     private void Start() {
-        target.TryGetComponent<CarBrain>(out car);
+        CarBrain target = null;
+        try
+        {
+            target = FindObjectOfType<CarBrain>();
+        }
+        catch
+        {
+            target = null;
+        }
+        finally
+        {
+            if (target != null)
+            {
+                if (target.IsOwner)
+                {
+                    this.target = target;
+                }
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!(car is null))
+        if (target is null) return;
+        var pos = target.transform.position;
+        var rot = target.transform.rotation;
+        if (target.Movement.isReversing)
         {
-            var pos = target.position;
-            var rot = target.rotation;
-            if (car.Movement.isReversing)
-            {
-                rot *= Quaternion.Euler(0, 180, 0);
-            }
-            transform.SetPositionAndRotation(pos, rot);
+            rot *= Quaternion.Euler(0, 180, 0);
         }
+        transform.SetPositionAndRotation(pos, rot);
+    }
+
+    public void SetTarget(CarBrain target)
+    {
+        this.target = target;
     }
 }

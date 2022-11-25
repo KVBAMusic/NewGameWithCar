@@ -151,7 +151,7 @@ public class CarBrain : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         
-        transform.position = new Vector3(135, 36, -14); //temporary
+        FindObjectOfType<CameraTarget>().SetTarget(this);
     }
 
     private void Awake() 
