@@ -35,36 +35,123 @@ public class CarBrain : NetworkBehaviour
 
     // przykładowy NetworkVariable:
     //
-    // NetworkVariable<T> netVar = new NetowrkVariable<T>();
-    // NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość);
-    // NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.[tu coś wstaw]);
-    // ---------------------------------
+    //      NetworkVariable<T> netVar = new NetowrkVariable<T>();
+    //      NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość);
+    //      NetworkVariable<T> netVar = new NetowrkVariable<T>(wartość, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.[tu coś wstaw]);
+    //
     // T NIE MOŻE BYĆ NULLABLE!!!
+    // ---------------------------------
     // jeśli chcesz dać klasę, zrób dedykowanego structa z tą klasą (musi implementować INetworkSerializable)
     // tam będzie parametr serializer, po prostu daj
     //
-    // serializer.SerializeValue(ref [pole structa]);
+    //      serializer.SerializeValue(ref [pole structa]);
+    //
     // DLA KAŻDEGO POLA
     // ---------------------------------
     // jeśli chcesz użyć stringa, najpierw daj na górze
     //
-    // using Unity.Collections;
+    //      using Unity.Collections;
     //
     // a potem użyj któregoś structa FixedString, np FixedString128Bytes
     // NIE MOŻNA ZMIENIAĆ DŁUGOŚCI FixedString, GDYŻ NIE JEST ON REALOKOWANY!!!!
     // ---------------------------------
     // jak chcesz zmienić wartość NetworkVariable:
     //
-    // netVar.Value = [nowa wartość];
+    //      netVar.Value = [nowa wartość];
     // ---------------------------------
     // jak chcesz, żeby coś się działo po zmianie wartości:
     //
-    // netVar.OnValueChanged += (T previousValue, T newValue) => {// tu daj kod};
+    //      netVar.OnValueChanged += (T previousValue, T newValue) => {// tu daj kod};
+
+
+    // RPC - Alternatywny sposób komunikacji klienta z serwerem
+    // ServerRpc działa TYLKO NA SERWERZE!!!
+    // KOD WYKONYWANY JAKO ServerRpc NIE JEST WYKONYWANY NA KLIENTACH!!!
+    // ------------------------------
+    // Wszystkie metody serwera muszą w nazwie zawrzeć na końcu
+    //
+    //      ServerRpc
+    //
+    // i być opatrzone atrybutem
+    //
+    //      [ServerRpc]
+    //
+    // PARAMETRY TAKICH METOD NIE MOGĄ BYĆ NULLABLE!!!
+    // -------------------------------
+    // do takich metod możemy dać parametr typu
+    //      ServerRpcParams
+    // np.
+    //
+    //      [ServerRpc]
+    //      private void MethodServerRpc(ServerRpcParams serverRpcParams)
+    //      {
+    //          ...
+    //      }
+    //
+    // ServerRpcParams posiada 2 structy:
+    //
+    //      public ServerRpcSendParams Send;
+    //      public ServerRpcReceiveParams Receive;
+    //
+    // które można używać żeby sprecyzować, czy chcesz np. wysłać dane z serwera do klientów, lub
+    // nasłuchiwać danych od klientów
+    // ----------------------------------
+    
+    // ClientRpc działa TYLKO NA SERWERZE!!!
+    // KOD WYKONYWANY JAKO ClientRpc JEST WYKONYWANY NA WSZYSTKICH KLIENTACH!!!
+    // ------------------------------
+    // Wszystkie metody serwera muszą w nazwie zawrzeć na końcu
+    //
+    //      ClientRpc
+    //
+    // i być opatrzone atrybutem
+    //
+    //      [ClientRpc]
+    //
+    // PARAMETRY TAKICH METOD NIE MOGĄ BYĆ NULLABLE!!!
+    // -------------------------------
+    // do takich metod możemy dać parametr typu
+    //      ClientRpcParams
+    // np.
+    //
+    //      [ClientRpc]
+    //      private void MethodClientRpc(ClientRpcParams serverRpcParams)
+    //      {
+    //          ...
+    //      }
+    //
+    // ServerRpcParams posiada 2 structy:
+    //
+    //      public ClientRpcSendParams Send;
+    //      public ClientRpcReceiveParams Receive;
+    //
+    // które można używać żeby np. sprecyzować,
+    // do których klientów chcesz wysłać dany ClientRpc
+    // -----------------------------------------
+    // ten kod wyśle słowo "test" do klienta o ID 1
+    //      [ClientRpc]
+    //      private void TestClientRpc(ClientRpcParams clientRpcParams)
+    //      {
+    //          Debug.Log("test");
+    //      }
+    //
+    //      private void Update()
+    //      {
+    //          if (Input.GetKeyDown(KeyCode.K))
+    //          {
+    //              TestClientRpc(new ClientRpcParams{ Send = new ClientRpcSendParams {TargetClientIds = new List<uint>{1} } } );
+    //          }
+    //      }
+    //
+    // ----------------------------------
+
 
     // w przypadku, gdy musisz zrobić jakiś init z sieci daj to w 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        
+        transform.position = new Vector3(135, 36, -14); //temporary
     }
 
     private void Awake() 
@@ -76,7 +163,6 @@ public class CarBrain : NetworkBehaviour
 
     private void OnEnable()
     {
-        transform.position = new Vector3(135, 36, -14); //temporary
     }
 
     private void Init(CarSettings settings)
