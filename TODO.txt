@@ -1,5 +1,23 @@
-TECHNICAL
+CAR CONTROLS
+- will use new input system
+-- will support keyboard and gamepad
+-- ability to rebind the controls
+-- needed:
+--- gas
+--- brake/reverse
+--- turning
+--- use powerup
+--- handbrake?
+--- drifting (CTR style probably)
+- support for anti-gravity/maglev?
+- using a powerup triggers an event or UnityEvent
 
+CTR-STYLE DRIFTING/BOOSTING
+- new class for boosting
+- boost reserves, like in CNK
+- CTR:NF blue flame thingy?????
+
+TECHNICAL MULTIPLAYER
 - lobby
 -- max 8 osób (12?)
 -- jeśli będą puste miejsca, wypełnij botami
@@ -30,6 +48,11 @@ TECHNICAL
 -- gracze będą na grać na wszystkich mapach po kolei
 -- pod koniec mogą być naliczane punkty
 
+
+POWERUPS
+- boost
+-- self-explanatory
+-- adds n units to the boost tank
 
 - nauczyć się porządnego teksturowania
 TRACK THEMES
