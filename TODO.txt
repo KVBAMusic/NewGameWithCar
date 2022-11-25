@@ -1,0 +1,35 @@
+TECHNICAL
+
+- lobby
+-- max 8 osób (12?)
+-- jeśli będą puste miejsca, wypełnij botami
+-- podział na publiczne i prywatne
+--- prywatne wymagają hasła
+
+- tryby multiplayer
+-- single race
+-- last man standing
+--- po kolejnym okrążeniu lidera ostatni gracz odpada
+--- ostatni gracz który zostanie zwycięża
+-- domination
+--- wzorowany na domination z DiRT 2
+--- liczą się czasy sektorów
+--- im wyższe miejsce w sektorze, tym więcej punktów
+--- wygrywa ten, który po n okrążeniach posiada najwięcej punktów
+
+- opcje gry
+-- normal mode
+-- itemless
+-- no bots
+-- championship
+--- naliczane punkty za pozycje
+--- naliczane albo w sumie za całą sesję albo za pojedyncze playlisty
+
+- playlist
+-- możliwość dobierania własnej kolejności tras
+-- gracze będą na grać na wszystkich mapach po kolei
+-- pod koniec mogą być naliczane punkty
+
+
+- nauczyć się porządnego teksturowania
+TRACK THEMES
