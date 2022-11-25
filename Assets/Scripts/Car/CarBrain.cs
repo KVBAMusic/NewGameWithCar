@@ -151,9 +151,24 @@ public class CarBrain : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         
-        FindObjectOfType<CameraTarget>().SetTarget(this);
+        var cam = FindObjectOfType<CameraTarget>();
+        if (cam.target == null && IsOwner)
+        {
+            cam.SetTarget(this);
+        }
         
         Init(CarSettings.NewPlayer(new CarStats()));
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        var cam = FindObjectOfType<CameraTarget>();
+        if (IsOwner)
+        {
+            cam.SetTarget(null);
+        }
     }
 
     private void Init(CarSettings settings)

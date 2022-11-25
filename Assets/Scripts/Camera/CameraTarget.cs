@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
 {
-    CarBrain target;
+    public CarBrain target {get; private set;}
 
     private void Start() {
         CarBrain target = null;
@@ -32,6 +32,7 @@ public class CameraTarget : MonoBehaviour
     void Update()
     {
         if (target is null) return;
+        if (!target.IsOwner) return;
         var pos = target.transform.position;
         var rot = target.transform.rotation;
         if (target.Movement.isReversing)
