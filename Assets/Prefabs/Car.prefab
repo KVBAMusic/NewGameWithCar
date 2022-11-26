@@ -86,13 +86,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
-    m_Stiffness: 4.1
+    m_ExtremumSlip: 0.3
+    m_ExtremumValue: 2
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 3
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &1158142580968300223
 GameObject:
@@ -148,13 +148,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
-    m_Stiffness: 4.1
+    m_ExtremumSlip: 0.3
+    m_ExtremumValue: 2
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 3
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &1158142580999899704
 GameObject:
@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 1158142581757343449}
   - component: {fileID: 8704785368715220559}
   - component: {fileID: -7487232949087986750}
+  - component: {fileID: 3798903955385852214}
   m_Layer: 6
   m_Name: Car
   m_TagString: Untagged
@@ -254,7 +255,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158142581757343442}
-  m_LocalRotation: {x: 0.018278344, y: 0.9102037, z: -0.040402718, w: -0.41178015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -264,7 +265,7 @@ Transform:
   - {fileID: 1158142582525860998}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 3.353, y: -491.20398, z: 3.822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1158142581757343443
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -310,7 +311,8 @@ MonoBehaviour:
   movement: {fileID: 1158142581757343446}
   aIController: {fileID: 1158142581757343448}
   position: {fileID: 1158142581757343449}
-  networkObject: {fileID: 0}
+  boost: {fileID: 3798903955385852214}
+  networkObject: {fileID: 8704785368715220559}
   isAI: 0
 --- !u!114 &1158142581757343446
 MonoBehaviour:
@@ -336,7 +338,7 @@ MonoBehaviour:
   - {fileID: 1158142580999899705}
   maxSteerAngle: 5
   acceleration: 25
-  maxSpeed: 30
+  maxSpeed: 20
   downforce: 50
 --- !u!114 &1158142581757343448
 MonoBehaviour:
@@ -408,6 +410,27 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &3798903955385852214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158142581757343442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15c6c942c15c74f459f43337cc7edfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boostDecrementRate: 1
+  minBoostAmount: 0.01
+  maxBoostTime: 1
+  maxBoostAmount: 5
+  minFallingTimeAfterJump: 1.1
+  jumpingForce: 5
+  speedMultiplier: 1.4
+  boostState:
+    m_InternalValue: 0
 --- !u!1 &1158142581849994108
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,13 +485,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
-    m_Stiffness: 4.1
+    m_ExtremumSlip: 0.3
+    m_ExtremumValue: 2
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 3
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &1158142582243820146
 GameObject:
@@ -623,13 +646,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 0.2
   m_SidewaysFriction:
-    m_ExtremumSlip: 0.2
-    m_ExtremumValue: 1
-    m_AsymptoteSlip: 0.5
-    m_AsymptoteValue: 0.75
-    m_Stiffness: 4.1
+    m_ExtremumSlip: 0.3
+    m_ExtremumValue: 2
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 3
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1001 &1158142581423126698
 PrefabInstance:

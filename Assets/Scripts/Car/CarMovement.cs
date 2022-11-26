@@ -58,8 +58,8 @@ public class CarMovement : AbstractCarComponent
             axisV = Input.GetAxis("Vertical");
         }
 
-        wheels_col[0].steerAngle = maxSteerAngle * axisH;
-        wheels_col[1].steerAngle = maxSteerAngle * axisH;
+        wheels_col[0].steerAngle = maxSteerAngle * (axisH + car.Boost.driftDirection);
+        wheels_col[1].steerAngle = maxSteerAngle * (axisH + car.Boost.driftDirection);
 
         for (int i = 0; i < 4; i++)
         {
@@ -71,7 +71,7 @@ public class CarMovement : AbstractCarComponent
     private void FixedUpdate() {
         float vel = car.RB.velocity.magnitude;
         if (IsOnGround)
-            car.RB.velocity += Mathf.Lerp(acceleration * axisV, 0, vel / maxSpeed) * Time.fixedDeltaTime * transform.forward;
+            car.RB.velocity += Mathf.Lerp(acceleration * axisV, 0, vel / (maxSpeed * (car.Boost.IsActivelyBoosting ? car.Boost.SpeedMultiplier : 1f))) * Time.fixedDeltaTime * transform.forward;
 
         car.RB.AddForce(-transform.up * (vel * downforce));
     }

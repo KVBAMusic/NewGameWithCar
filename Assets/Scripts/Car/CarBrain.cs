@@ -9,6 +9,7 @@ using PathCreation;
 [RequireComponent(typeof(CarMovement))]
 [RequireComponent(typeof(CarAIController))]
 [RequireComponent(typeof(CarPositionTracker))]
+[RequireComponent(typeof(CarBoostHandler))]
 public class CarBrain : NetworkBehaviour
 {
     public event EventHandler OnLapStarted;
@@ -20,6 +21,7 @@ public class CarBrain : NetworkBehaviour
     [SerializeField] private CarMovement movement;
     [SerializeField] private CarAIController aIController;
     [SerializeField] private CarPositionTracker position;
+    [SerializeField] private CarBoostHandler boost;
     [SerializeField] private NetworkObject networkObject;
     private NetworkManager networkManager;
     private ulong clientId;
@@ -28,6 +30,7 @@ public class CarBrain : NetworkBehaviour
     public CarMovement Movement => movement;
     public CarAIController AIController => aIController;
     public CarPositionTracker Position => position;
+    public CarBoostHandler Boost => boost;
     public bool isAI = true;
 
 
